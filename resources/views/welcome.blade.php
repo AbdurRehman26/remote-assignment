@@ -20,10 +20,21 @@
         }
     </style>
 </head>
-<body class="antialiased">
-<div id="app">
+<body class="font-sans antialiased">
+
+<div class="min-h-screen bg-gray-100" id="app">
     <div class="relative flex items-top justify-center min-h-screen bg-gray-100 sm:items-center py-4 sm:pt-0">
-        <main-app/>
+
+        <div class="py-12">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 bg-white border-b border-gray-200">
+                        <router-view />
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 

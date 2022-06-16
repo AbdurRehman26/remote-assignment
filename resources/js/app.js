@@ -1,10 +1,14 @@
 import './bootstrap';
+require('alpinejs');
 
 import { createApp } from 'vue'
-const app = createApp({});
+import router from './router'
 
-import Main from './src/Main.vue';
+import MainApp from './Main.vue';
 
-app.component('main-app', Main)
 
-app.mount('#app')
+createApp({
+    components: {
+        MainApp
+    }
+}).use(router).mount('#app')
