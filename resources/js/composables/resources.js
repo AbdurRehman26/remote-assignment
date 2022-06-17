@@ -9,15 +9,15 @@ export default function useResources() {
     const router = useRouter()
 
     const getResources = async () => {
-        let response = await axios.get('/api/companies')
+        let response = await axios.get('/api/resource')
         resources.value = response.data.data
     }
 
     const storeResource = async (data) => {
         errors.value = ''
         try {
-            await axios.post('/api/companies', data)
-            await router.push({ name: 'companies.index' })
+            await axios.post('/api/resource', data)
+            await router.push({ name: 'resource.index' })
         } catch (e) {
             if (e.response.status === 422) {
                 for (const key in e.response.data.errors) {

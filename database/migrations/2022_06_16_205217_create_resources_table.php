@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('resources', function (Blueprint $table) {
             $table->id();
+            $table->morphs('resourceable');
             $table->timestamps();
         });
     }

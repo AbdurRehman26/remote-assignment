@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('links', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('link');
+            $table->boolean('new_tab');
             $table->timestamps();
         });
     }
