@@ -24,7 +24,6 @@
 
 <div class="container" id="app">
 
-    <main-nav />
     <router-view />
 
 </div>
