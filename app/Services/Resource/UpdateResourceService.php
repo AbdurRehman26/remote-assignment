@@ -2,13 +2,12 @@
 
 namespace App\Services\Resource;
 
-use App\Models\Contracts\ResourceTypeInterface;
 use App\Models\Resource;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class StoreResourceService
+class UpdateResourceService
 {
     protected array $data;
 
@@ -24,32 +23,24 @@ class StoreResourceService
     /**
      * @throws Exception
      */
-    public function create(array $data): Resource
+    public function update(Resource $resource, array $data): Resource
     {
         try {
 
             DB::beginTransaction();
 
-            $resource = $this->attachToResource(resolve($this->resourceTypes[
-            $data['type']
-            ])->create($data));
+            $resource = resolve($this->resourceTypes[
+                Resource::ResourceableTypes[$resource->resourceable_type]
+            ])->update($resource, $data);
 
             DB::commit();
 
             return $resource;
 
         } catch (Exception $e) {
-            DB::rollBack();
             Log::error($e->getMessage());
 
             throw $e;
         }
     }
-
-    private function attachToResource(ResourceTypeInterface $resourceType): Resource
-    {
-        $resourceType->resource()->save(new Resource());
-        return $resourceType->resource;
-    }
-
 }

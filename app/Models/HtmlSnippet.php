@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\Contracts\ResourceTypeInterface;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class HtmlSnippet extends Model
+class HtmlSnippet extends Model implements ResourceTypeInterface
 {
     use HasFactory;
 

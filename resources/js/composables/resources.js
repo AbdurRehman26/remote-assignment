@@ -16,7 +16,8 @@ export default function useResources() {
 
     const getResource = async (id) => {
         let response = await axios.get(`/api/resource/${id}`)
-        resource.value = response.data.data
+        resource.value = response.data.data.resourceable;
+        resource.value.type = response.data.data.resourceable_type;
     }
 
     const storeResource = async (data) => {
