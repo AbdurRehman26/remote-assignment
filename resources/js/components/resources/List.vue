@@ -1,4 +1,11 @@
 <template>
+
+    <div class="flex place-content-end mb-4">
+        <div class="px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 cursor-pointer">
+            <router-link :to="{ name: 'admin' }" class="text-sm font-medium">Create Resource</router-link>
+        </div>
+    </div>
+
     <div class="overflow-hidden overflow-x-auto min-w-full align-middle sm:rounded-md">
         <table class="min-w-full border divide-y divide-gray-200">
             <thead>
@@ -37,6 +44,11 @@
                     <td class="px-6 py-4 text-sm leading-5 text-gray-900 whitespace-no-wrap">
                         {{ item.website }}
                     </td>
+                    <td class="px-6 py-4 text-sm text-center leading-5 text-gray-900 whitespace-no-wrap">
+                        <button @click="deleteResource(item.id)"
+                                class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring ring-gray-300 disabled:opacity-25 transition ease-in-out duration-150">
+                            Delete</button>
+                    </td>
                 </tr>
             </template>
             </tbody>
@@ -50,12 +62,22 @@ import { onMounted } from 'vue';
 
 export default {
     setup() {
-        const { resources, getResources } = useResources()
+        const { resources, getResources, destroyResource } = useResources()
+
+        const deleteResource = async (id) => {
+            if (!window.confirm('You sure?')) {
+                return
+            }
+
+            await destroyResource(id)
+            await getResources()
+        }
 
         onMounted(getResources)
 
         return {
             resources,
+            deleteResource
         }
     }
 }

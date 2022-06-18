@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Resources from '../components/resources/List.vue'
+import CreateResource from '../components/resources/Create'
 
 const routes = [
     {
@@ -11,7 +12,7 @@ const routes = [
     {
         path: '/admin',
         name: 'admin',
-        component: Resources
+        component: CreateResource
     }
 ];
 

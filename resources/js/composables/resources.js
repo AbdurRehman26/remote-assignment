@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 
 export default function useResources() {
     const resources = ref([])
+    const resource = ref([])
 
     const errors = ref('')
     const router = useRouter()
@@ -11,6 +12,11 @@ export default function useResources() {
     const getResources = async () => {
         let response = await axios.get('/api/resource')
         resources.value = response.data.data
+    }
+
+    const getResource = async (id) => {
+        let response = await axios.get(`/api/resource/${id}`)
+        resource.value = response.data.data
     }
 
     const storeResource = async (data) => {
@@ -27,10 +33,32 @@ export default function useResources() {
         }
     }
 
+    const updateResource = async (id) => {
+        errors.value = ''
+        try {
+            await axios.patch(`/api/resource/${id}`, resource.value)
+            await router.push({ name: 'resources.index' })
+        } catch (e) {
+            if (e.response.status === 422) {
+                for (const key in e.response.data.errors) {
+                    errors.value += e.response.data.errors[key][0] + ' ';
+                }
+            }
+        }
+    }
+
+    const destroyResource = async (id) => {
+        await axios.delete(`/api/resource/${id}`)
+    }
+
     return {
         errors,
         resources,
+        resource,
         getResources,
-        storeResource
+        getResource,
+        storeResource,
+        updateResource,
+        destroyResource
     }
 }

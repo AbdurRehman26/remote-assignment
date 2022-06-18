@@ -14,5 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('resource', [ResourceController::class, 'index']);
-
+Route::resource('resource', ResourceController::class, )->only('index', 'store');
