@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\FileController;
 use App\Http\Controllers\API\ResourceController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('resource', ResourceController::class, );
+Route::resource('resource', ResourceController::class);
+Route::post('upload-file', [FileController::class, 'upload']);

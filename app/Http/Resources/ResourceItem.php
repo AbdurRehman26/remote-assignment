@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use App\Models\Resource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ResourceList extends JsonResource
+class ResourceItem extends JsonResource
 {
     /**
      * @param $request

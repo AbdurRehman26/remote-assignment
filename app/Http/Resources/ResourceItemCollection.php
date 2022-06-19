@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class ResourceListCollection extends ResourceCollection
+class ResourceItemCollection extends ResourceCollection
 {
     /**
      * @param $request

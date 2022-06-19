@@ -23,6 +23,7 @@ export default function useResources() {
     const storeResource = async (data) => {
         errors.value = ''
         try {
+            console.log(data);
             await axios.post('/api/resource', data)
             await router.push({ name: 'resource.index' })
         } catch (e) {
@@ -38,7 +39,7 @@ export default function useResources() {
         errors.value = ''
         try {
             await axios.patch(`/api/resource/${id}`, resource.value)
-            await router.push({ name: 'resources.index' })
+            await router.push({ name: 'resource.index' })
         } catch (e) {
             if (e.response.status === 422) {
                 for (const key in e.response.data.errors) {

@@ -29,10 +29,15 @@ class StoreResourceRequest extends FormRequest
             ],
             'link' => [
                 Rule::requiredIf($this->type === 'link'),
+                "sometimes",
+                'url'
             ],
             'new_tab' => [
                 Rule::requiredIf($this->type === 'link'),
             ],
+            'file' => [
+                Rule::requiredIf($this->type === 'pdf')
+            ]
         ];
     }
 }

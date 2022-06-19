@@ -7,12 +7,12 @@ import EditResource from '../components/resources/Edit'
 const routes = [
     {
         path: '/',
-        name: 'home',
+        name: 'resource.index',
         component: Resources
     },
     {
-        path: '/admin',
-        name: 'admin',
+        path: '/resource/create',
+        name: 'resource.create',
         component: CreateResource
     },
     {

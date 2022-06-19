@@ -1,4 +1,7 @@
 <template>
+
+    <BackToList></BackToList>
+
     <div class="mt-2 mb-6 text-sm text-red-600" v-if="errors !== ''">
         {{ errors }}
     </div>
@@ -9,7 +12,7 @@
                 <label for="type" class="block text-sm font-medium text-gray-700">Resource Type</label>
                 <div class="mt-1">
                     <select type="text" name="name" id="name"
-                           class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                           class="block p-2 mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                            v-model="form.type">
                         <option value="pdf">PDF</option>
                         <option value="link">Link</option>
@@ -21,7 +24,7 @@
             <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
             <div class="mt-1">
                 <input type="text" name="title" id="title"
-                       class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                       class="block mt-1 p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                        v-model="form.title">
             </div>
 
@@ -31,14 +34,14 @@
                 <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                 <div class="mt-1">
                     <textarea type="text" name="description" id="description"
-                              class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                              class="block p-2 mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                               v-model="form.description"></textarea>
                 </div>
 
                 <label for="snippet" class="block text-sm font-medium text-gray-700">Snippet</label>
                 <div class="mt-1">
                     <textarea type="text" name="snippet" id="snippet"
-                              class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                              class="block p-2 mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                               v-model="form.snippet"></textarea>
                 </div>
 
@@ -49,21 +52,25 @@
                 <label for="link" class="block text-sm font-medium text-gray-700">Link</label>
                 <div class="mt-1">
                     <input type="text" name="link" id="link"
-                              class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                              class="block p-2 mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                               v-model="form.link">
                 </div>
 
 
                 <label for="new_tab" class="block text-sm font-medium text-gray-700">Open in new tab</label>
                 <div class="mt-1">
-                    <input type="checkbox" name="new_tab" id="new_tab"
-                           class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                           v-model="form.new_tab"/>
+                    <input type="checkbox" name="new_tab" id="new_tab" v-model="form.new_tab"/>
                 </div>
 
             </div>
 
+            <div v-if="isOfType('pdf')">
 
+                <label for="file" class="block text-sm font-medium text-gray-700">File</label>
+                <div class="mt-1">
+                    <FileUpload v-model="form.file"></FileUpload>
+                </div>
+            </div>
         </div>
 
         <button type="submit"
@@ -76,15 +83,23 @@
 
 <script>
 import useResources from '../../composables/resources'
-import { reactive, computed } from 'vue'
+import { reactive, ref } from 'vue'
+import FileUpload from '../../components/shared/FileUpload.vue';
+import BackToList from '../../components/shared/BackToList.vue';
 
 export default {
+    components: {
+        FileUpload,
+        BackToList
+    },
+
     setup() {
         const form = reactive({
             type: '',
             title: '',
             description: '',
             snippet: '',
+            file: ''
         })
 
         const { errors, storeResource } = useResources()
