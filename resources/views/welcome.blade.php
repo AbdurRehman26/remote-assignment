@@ -28,7 +28,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <router-view />
+                    <div class="relative flex items-top justify-center sm:items-center sm:pt-0">
+                        <div class="hidden fixed top-0 left-0 px-6 py-4 sm:block">
+                            <a href="/" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
+                            <a href="/admin" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Admin</a>
+                        </div>
+                    </div>
+                    <router-view/>
+
                 </div>
             </div>
         </div>

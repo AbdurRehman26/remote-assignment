@@ -21,6 +21,11 @@ const routes = [
         component: EditResource,
         props: true
     },
+    {
+        path: '/admin',
+        name: 'resource.admin',
+        component: Resources
+    },
 
 ];
 
